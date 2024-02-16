@@ -1,6 +1,5 @@
 if (typeof GAME === 'undefined') {} else {
     let Pog = setInterval(() => {
-        if (GAME && "parseidin" in GAME && GAME.parseidin != null && GAME.parseidin() && checked) {
             clearInterval(Pog);
 
             function createPanel() {
@@ -2697,6 +2696,5 @@ if (typeof GAME === 'undefined') {} else {
                 LPVM.wait = 40;
                 RESP.wait = 15;
             };
-        } else {}
     }, 50);
 }
