@@ -1,0 +1,1 @@
+$.get("https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/script1-2.js", (data) => { $("body").append(`<script>${data}<\/script>`); });
