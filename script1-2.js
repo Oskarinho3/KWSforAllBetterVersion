@@ -678,11 +678,12 @@ if (typeof GAME === 'undefined') {} else {
                             let received = $("#act_prizes").find("div.act_prize.disabled").length;
                             let is_trader = new Date();
                             let trader = `<span class='kws_top_bar_section trader_info' style='cursor:pointer;'>HANDLARZ</span> `;
-                            let soulCards_one = `<span class='kws_top_bar_section soul_cards_one' style='cursor:pointer;'>KD1</span>`;
-                            let soulCards_two = `<span class='kws_top_bar_section soul_cards_two' style='cursor:pointer;'>KD2</span>`;
-                            let soulCards_three = `<span class='kws_top_bar_section soul_cards_three' style='cursor:pointer;'>KD3</span>`;
-                            let soulCards_four = `<span class='kws_top_bar_section soul_cards_four' style='cursor:pointer;'>KD4</span>`;
-                            let soulCards_five = `<span class='kws_top_bar_section soul_cards_five' style='cursor:pointer;'>KD5</span>`;
+                            let soulCards_current = $(".sc_sets_all.current").html();
+                            let soulCards_one = `<span class='kws_top_bar_section soul_cards_one' style='cursor:pointer;color=${soulCards_current == "I" ? "red" : "white"}'>KD1</span>`;
+                            let soulCards_two = `<span class='kws_top_bar_section soul_cards_two' style='cursor:pointer;color=${soulCards_current == "II" ? "red" : "white"}'>KD2</span>`;
+                            let soulCards_three = `<span class='kws_top_bar_section soul_cards_three' style='cursor:pointer;color=${soulCards_current == "III" ? "red" : "white"}'>KD3</span>`;
+                            let soulCards_four = `<span class='kws_top_bar_section soul_cards_four' style='cursor:pointer;color=${soulCards_current == "IV" ? "red" : "white"}'>KD4</span>`;
+                            let soulCards_five = `<span class='kws_top_bar_section soul_cards_five' style='cursor:pointer;color=${soulCards_current == "V" ? "red" : "white"}'>KD5</span>`;
                             let instance = `${sum_instances}/12`;
                             $("#secondary_char_stats .instance ul").html(instance);
                             let activities = `${activity}/185 (${received}/5)`;
@@ -2107,6 +2108,6 @@ if (typeof GAME === 'undefined') {} else {
                     let roll2 = false;
                     let roll1 = false;
                     let roll3 = false;
-                    let version = '3.1.0';
+                    let version = '3.1.1';
                 }
             )}
