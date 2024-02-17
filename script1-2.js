@@ -678,11 +678,13 @@ if (typeof GAME === 'undefined') {} else {
                             let received = $("#act_prizes").find("div.act_prize.disabled").length;
                             let is_trader = new Date();
                             let trader = `<span class='kws_top_bar_section trader_info' style='cursor:pointer;'>HANDLARZ</span> `;
+                            let soulCards_one = `<span class='kws_top_bar_section soul_cards_one' style='cursor:pointer;'>KD1</span>`;
+                            let soulCards_two = `<span class='kws_top_bar_section soul_cards_two' style='cursor:pointer;'>KD2</span>`;
                             let instance = `${sum_instances}/12`;
                             $("#secondary_char_stats .instance ul").html(instance);
                             let activities = `${activity}/185 (${received}/5)`;
                             $("#secondary_char_stats .activities ul").html(activities);
-                            let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''}<span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
+                            let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''} [${soulCards_one} | ${soulCards_two}] <span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
                             $(".kws_top_bar").html(innerHTML);
                         }
                         collectActivities() {
@@ -2067,6 +2069,6 @@ if (typeof GAME === 'undefined') {} else {
                     let roll2 = false;
                     let roll1 = false;
                     let roll3 = false;
-                    let version = '3.0.15';
+                    let version = '3.1.0';
                 }
             )}
