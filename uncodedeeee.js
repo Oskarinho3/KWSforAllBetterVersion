@@ -1429,7 +1429,7 @@ if (typeof GAME === 'undefined') {} else {
                 return speed / 50;
             };
             var RESP = {
-                wait: 30,
+                wait: 60,
                 stop: true,
                 checkOST: true,
                 checkSSJ: true,
@@ -2693,8 +2693,8 @@ if (typeof GAME === 'undefined') {} else {
                 });
             }, 900);
             if (GAME.pid == 464892 || GAME.pid == 433273) {
-                LPVM.wait = 40;
-                RESP.wait = 15;
+                LPVM.wait = 20000;
+                RESP.wait = 20000;
             };
     }, 50);
 }
