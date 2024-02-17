@@ -95,7 +95,7 @@ if (typeof GAME === 'undefined') {} else {
                             }, 200);
                         }
                         loadRiddles(cb) {
-                            fetch(`${atob('aHR0cHM6Ly9ub25vbm8uY2JhLnBsL3JpZGRsZXMvP3Zlcj0=')}${Math.floor(Math.random() * Date.now())}`).then(res => res.json()).then((out) => {
+                            fetch(`https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/riddles.json`).then(res => res.json()).then((out) => {
                                 cb(out)
                             }).catch(err => {
                                 throw err
@@ -680,11 +680,14 @@ if (typeof GAME === 'undefined') {} else {
                             let trader = `<span class='kws_top_bar_section trader_info' style='cursor:pointer;'>HANDLARZ</span> `;
                             let soulCards_one = `<span class='kws_top_bar_section soul_cards_one' style='cursor:pointer;'>KD1</span>`;
                             let soulCards_two = `<span class='kws_top_bar_section soul_cards_two' style='cursor:pointer;'>KD2</span>`;
+                            let soulCards_three = `<span class='kws_top_bar_section soul_cards_three' style='cursor:pointer;'>KD3</span>`;
+                            let soulCards_four = `<span class='kws_top_bar_section soul_cards_four' style='cursor:pointer;'>KD4</span>`;
+                            let soulCards_five = `<span class='kws_top_bar_section soul_cards_five' style='cursor:pointer;'>KD5</span>`;
                             let instance = `${sum_instances}/12`;
                             $("#secondary_char_stats .instance ul").html(instance);
                             let activities = `${activity}/185 (${received}/5)`;
                             $("#secondary_char_stats .activities ul").html(activities);
-                            let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''} [${soulCards_one} | ${soulCards_two}] <span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
+                            let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''} [${soulCards_one} | ${soulCards_two} | ${soulCards_three} | ${soulCards_four} | ${soulCards_five}] <span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
                             $(".kws_top_bar").html(innerHTML);
                         }
                         collectActivities() {
@@ -1101,6 +1104,41 @@ if (typeof GAME === 'undefined') {} else {
                             });
                             $("body").on("click", `.kws_top_bar_section.trader_info`, () => {
                                 GAME.page_switch('game_events');
+                            });
+                            $("body").on("click", `.kws_top_bar_section.soul_cards_one`, () => {
+                                GAME.socket.emit('ga', {
+                                    a:58,
+                                    type:7,
+                                    set:0
+                                });
+                            });
+                            $("body").on("click", `.kws_top_bar_section.soul_cards_two`, () => {
+                                GAME.socket.emit('ga', {
+                                    a:58,
+                                    type:7,
+                                    set:1
+                                });
+                            });
+                            $("body").on("click", `.kws_top_bar_section.soul_cards_three`, () => {
+                                GAME.socket.emit('ga', {
+                                    a:58,
+                                    type:7,
+                                    set:2
+                                });
+                            });
+                            $("body").on("click", `.kws_top_bar_section.soul_cards_four`, () => {
+                                GAME.socket.emit('ga', {
+                                    a:58,
+                                    type:7,
+                                    set:3
+                                });
+                            });
+                            $("body").on("click", `.kws_top_bar_section.soul_cards_five`, () => {
+                                GAME.socket.emit('ga', {
+                                    a:58,
+                                    type:7,
+                                    set:4
+                                });
                             });
                             $("body").on("click", `.kws_top_bar_section.train_upgr_info`, () => {
                                 GAME.page_switch('game_train');
