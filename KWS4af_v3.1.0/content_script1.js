@@ -1,1 +1,1 @@
-$.get("https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/script1-2.js", (data) => { $("body").append(`<script>${data}<\/script>`); });
+$.get("https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/addBalls/script1-2.js", (data) => { $("body").append(`<script>${data}<\/script>`); });

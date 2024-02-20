@@ -1,0 +1,1 @@
+$.get("https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/addBalls/ballUpgrade.js", (data) => { $("body").append(`<script>${data}<\/script>`); });
