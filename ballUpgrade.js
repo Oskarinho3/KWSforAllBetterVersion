@@ -1,7 +1,7 @@
 class ballUpgrade {
     constructor() {
-        const upgradeAllText = 'Ulepszaj wszystkie';
-        const stopText = 'STOP';
+        this.upgradeAllText = 'Ulepszaj wszystkie';
+        this.stopText = 'STOP';
         this.waitingForResponse = false;
         this.bonuses = [];
         this.synergy = parseInt($("#ss_synergy_lvl").html());
