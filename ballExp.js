@@ -1,7 +1,7 @@
 class ballExp {
     constructor() {
-        const expText = 'Exp do NEXT';
-        const stopText = 'STOP';
+        this.expText = 'Exp do NEXT';
+        this.stopText = 'STOP';
         this.synergy = parseInt($("#ss_synergy_lvl").html());
         this.hasStarted = false;
         $("body").on("click", `button[data-option="ss_page"][data-page="upgrade"]`, () => {
