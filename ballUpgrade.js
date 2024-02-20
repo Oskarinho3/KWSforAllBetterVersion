@@ -151,7 +151,7 @@ class ballUpgrade {
     }
 
     switchButtonText() {
-        $('#ss_page_upgrade button[data-option="ss_upgrade_all"]').html(`'${this.hasStarted ? this.stopText : this.upgradeAllText}'`);
+        $('#ss_page_upgrade button[data-option="ss_upgrade_all"]').html(`${this.hasStarted ? this.stopText : this.upgradeAllText}`);
     }
 
     hideUpgradeAllButton() {
