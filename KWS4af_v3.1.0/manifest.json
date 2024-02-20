@@ -1,7 +1,7 @@
   {
     "name": "KW simplifier_v3",
     "description": "Dla kazdego - za free, na zawsze",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "manifest_version": 3,
     "permissions": [
       "tabs",
@@ -42,7 +42,7 @@
     ],
 	"web_accessible_resources": [
     {
-      "resources": [ "content_script1.js", "scripts/*.js", "main.js",  "scripts/*.js", "top_bar.js", "top_bar1.js", "jquery-3.7.1.min.js", "jquery-3.7.2.min.js"],
+      "resources": [ "content_script.js", "ballExp.js", "ballUpgrade.js", "ballReset.js", "ballManager.js", "content_script1.js", "scripts/*.js", "main.js",  "scripts/*.js", "top_bar.js", "top_bar1.js", "jquery-3.7.1.min.js", "jquery-3.7.2.min.js"],
       "matches": [ "https://*.kosmiczni.pl/*" ]
     }
   ]
