@@ -16,8 +16,5 @@ function injectCode(src) {
     nullthrows(document.head || document.documentElement).appendChild(script);
 }
 
-setTimeout(injectCode(chrome.runtime.getURL('/ballExp.js')), 100);
-setTimeout(injectCode(chrome.runtime.getURL('/ballUpgrade.js')), 100);
-setTimeout(injectCode(chrome.runtime.getURL('/ballReset.js')), 100);
-setTimeout(injectCode(chrome.runtime.getURL('/ballManager.js')), 300);
-setTimeout(injectCode(chrome.runtime.getURL('/content_script1.js')), 600);
+
+injectCode(chrome.runtime.getURL('/content_script1.js'));
