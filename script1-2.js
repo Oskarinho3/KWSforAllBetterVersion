@@ -63,6 +63,7 @@ if (typeof GAME === 'undefined') { } else {
                 $("#clan_inner_wars h3").eq(0).append(` <button class="newBtn activate_all_clan_buffs">Aktywuj wszystkie buffy</button>`);
                 $(`#minimap_con`).append(`<div id="kws_locInfo"><div class="sekcja">INFORMACJE O LOKACJI</div><div class="content"></div></div>`);
                 $("#sett_page_local div").eq(0).prepend(`<b class="green">Zmień tło strony </b><div class="game_input"><input id="new_website_bg" style="width:370px;" type="text"></div><button class="option newBtn kws_change_website_bg" style="margin-left:5px;">Zmień</button><button class="option newBtn kws_reset_website_bg" style="margin-left:5px;">Reset</button><br><br>`);
+                $('.MoveIcon[data-option="mob_spawner_go"]').after('<div class="MoveIcon bigg option" data-option="map_multi_pvp" data-toggle="tooltip" data-original-title="<div class=tt>Multiwalka PvP<br />Klawisz skrótu:<b class=orange>B</b></div>"><img src="https://i.imgur.com/QPQBcFp.png"></div>');
                 this.workers_info = [false, false];
                 this.autoExpeditions = false;
                 this.autoExpeditionsInterval = false;
@@ -1285,6 +1286,9 @@ if (typeof GAME === 'undefined') { } else {
                 $("body").on("click", `.kws_reset_website_bg`, () => {
                     this.manageWebsiteBackground("reset");
                 });
+                $("body").on("click", `[data-option="map_multi_pvp"]`, () => {
+                    this.pvpKill();
+                });
                 $(document).keydown((event) => {
                     if (!$("input, textarea").is(":focus")) {
                         if (event.key === "x" || event.key === "X") {
@@ -1821,7 +1825,7 @@ if (typeof GAME === 'undefined') { } else {
         let roll2 = false;
         let roll1 = false;
         let roll3 = false;
-        let version = '3.2.1';
+        let version = '3.3.0';
     }
     )
 }
