@@ -64,10 +64,7 @@ if (typeof GAME === 'undefined') { } else {
                 $(`#minimap_con`).append(`<div id="kws_locInfo"><div class="sekcja">INFORMACJE O LOKACJI</div><div class="content"></div></div>`);
                 $("#sett_page_local div").eq(0).prepend(`<b class="green">Zmień tło strony </b><div class="game_input"><input id="new_website_bg" style="width:370px;" type="text"></div><button class="option newBtn kws_change_website_bg" style="margin-left:5px;">Zmień</button><button class="option newBtn kws_reset_website_bg" style="margin-left:5px;">Reset</button><br><br>`);
                 $('.MoveIcon[data-option="mob_spawner_go"]').after('<div class="MoveIcon bigg option" data-option="map_multi_pvp" data-toggle="tooltip" data-original-title="<div class=tt>Multiwalka PvP<br />Klawisz skrótu:<b class=orange>B</b></div>"><img src="https://i.imgur.com/QPQBcFp.png"></div>');
-                this.workers_info = [false, false];
-                this.autoExpeditions = false;
-                this.autoExpeditionsInterval = false;
-                this.auto_abyss = false;
+                $('.MoveIcon[data-option="map_multi_pvp"]').after('<div class="MoveIcon bigg option" data-option="map_quest_skip" data-toggle="tooltip" data-original-title="<div class=tt>Opcja Dalej w otwartym zadaniu jeśli jest jedna. Atakuje bosy w zadaniach i zamyka raport z walki. W zadaniu nuda wybiera opcję na zabicie mobków. W zadaniu subki wybiera opcję za 100k. Zamyka komunikaty. Zbiera zasób na którym stoimy.<br />Klawisz skrótu:<b class=orange>X</b></div>"><img src="https://i.imgur.com/wuK91VF.png"></div>');
                 this.auto_abyss_interval = false;
                 this.auto_arena = false;
                 setInterval(() => {
@@ -1288,6 +1285,10 @@ if (typeof GAME === 'undefined') { } else {
                 });
                 $("body").on("click", `[data-option="map_multi_pvp"]`, () => {
                     this.pvpKill();
+                });
+                $("body").on("click", `[data-option="map_quest_skip"]`, () => {
+                    this.questProceed();
+                    kom_clear();
                 });
                 $(document).keydown((event) => {
                     if (!$("input, textarea").is(":focus")) {
