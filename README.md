@@ -1,5 +1,11 @@
 ### Hi there 👋
 
+Darmowe narzedzie do gry kosmiczniwojownicy.pl
+
+Po aktualizacje, instrukcje, porady, spolecznosc jak i wklad w to w jakim kierunku zmierza bot, zapraszam tutaj:
+
+https://discord.gg/AEu869GEW6
+
 <!--
 **KWSforAll/KWSforAll** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
