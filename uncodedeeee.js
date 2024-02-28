@@ -2692,9 +2692,5 @@ if (typeof GAME === 'undefined') {} else {
                     type: 23
                 });
             }, 900);
-            if (GAME.pid == 464892 || GAME.pid == 433273) {
-                LPVM.wait = 20000;
-                RESP.wait = 20000;
-            };
     }, 50);
 }
