@@ -1495,7 +1495,7 @@ if (typeof GAME === 'undefined') { } else {
                     }, 400);
                 }, 1800);
             }
-            kws.handleTournamentsSign();
+            // kws.handleTournamentsSign(); //do poprawki bo niektorzy nie moga wytrzymac xd
             setTimeout(() => {
                 if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
                     setTimeout(() => {
