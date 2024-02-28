@@ -4,11 +4,11 @@
      scr.innerHTML = `const LoadScript = (url, cb) => { fetch(url).then(res => res.json()).then((out) => { cb(out) }).catch(err => { throw err }); }
  
  const links = {
-    "link1":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/main/ballExp.js",
-    "link2":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/main/ballUpgrade.js",
-    "link3":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/main/ballReset.js",
-    "link4":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/main/ballManager.js",
-    "link5":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/feature/main/script1-2.js",
+    "link1":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/ballExp.js",
+    "link2":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/ballUpgrade.js",
+    "link3":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/ballReset.js",
+    "link4":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/ballManager.js",
+    "link5":"https://raw.githubusercontent.com/KWSforAll/KWSforAll/main/script1-2.js",
  };
  
  const fetchPromises = Object.values(links).map(link => {
