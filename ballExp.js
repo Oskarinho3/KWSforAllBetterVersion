@@ -1,7 +1,7 @@
 class ballExp {
     constructor() {
         this.expText = 'Exp do NEXT';
-        this.expNonStopText = 'Exp bez przerwy';
+        this.expNonStopText = 'Exp no stop';
         this.stopText = 'STOP';
         this.synergy = parseInt($("#ss_synergy_lvl").html());
         this.hasStarted = false;
@@ -19,9 +19,7 @@ class ballExp {
             this.controller();
         });
         $("body").on("click", `button[data-option="ss_lvlup_nonstop"]`, () => {
-            if (this.hasStarted == false) {
-                this.nonStopExp = true;
-            }
+            this.nonStopExp = true;
             this.controller();
         });
     }
