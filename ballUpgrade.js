@@ -136,7 +136,7 @@ class ballUpgrade {
 
     switchCheckboxesState() {
         $(".ball_stats.stat_page input[type=checkbox]").each((index) => {
-            $(`#bon${index + 1}_upgrade`).prop('disabled', !this.hasStarted);
+            $(`#bon${index + 1}_upgrade`).prop('disabled', this.hasStarted);
         });
     }
 

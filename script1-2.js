@@ -26,6 +26,7 @@ if (typeof GAME === 'undefined') { } else {
                         writable: false
                     });
                 });
+                this.tourSigned = false;
                 this.settings = this.getSettings();
                 this.createCSS();
                 this.createMinimapSettings();
@@ -65,6 +66,7 @@ if (typeof GAME === 'undefined') { } else {
                 $("#sett_page_local div").eq(0).prepend(`<b class="green">Zmień tło strony </b><div class="game_input"><input id="new_website_bg" style="width:370px;" type="text"></div><button class="option newBtn kws_change_website_bg" style="margin-left:5px;">Zmień</button><button class="option newBtn kws_reset_website_bg" style="margin-left:5px;">Reset</button><br><br>`);
                 $('.MoveIcon[data-option="mob_spawner_go"]').after('<div class="MoveIcon bigg option" data-option="map_multi_pvp" data-toggle="tooltip" data-original-title="<div class=tt>Multiwalka PvP<br />Klawisz skrótu:<b class=orange>B</b></div>"><img src="https://i.imgur.com/QPQBcFp.png"></div>');
                 $('.MoveIcon[data-option="map_multi_pvp"]').after('<div class="MoveIcon bigg option" data-option="map_quest_skip" data-toggle="tooltip" data-original-title="<div class=tt>Opcja Dalej w otwartym zadaniu jeśli jest jedna. Atakuje bosy w zadaniach i zamyka raport z walki. W zadaniu nuda wybiera opcję na zabicie mobków. W zadaniu subki wybiera opcję za 100k. Zamyka komunikaty. Zbiera zasób na którym stoimy.<br />Klawisz skrótu:<b class=orange>X</b></div>"><img src="https://i.imgur.com/wuK91VF.png"></div>');
+                $('.MoveIcon[data-option="map_quest_skip"]').after('<div class="MoveIcon bigg option" data-option="map_quest_skip_time" data-toggle="tooltip" data-original-title="<div class=tt>Używanie zegarków w zadaniach<br />Klawisz skrótu:<b class=orange>N</b></div>"><img src="https://i.imgur.com/9YCvJKe.png"></div>');
                 this.auto_abyss_interval = false;
                 this.auto_arena = false;
                 setInterval(() => {
@@ -1290,6 +1292,9 @@ if (typeof GAME === 'undefined') { } else {
                     this.questProceed();
                     kom_clear();
                 });
+                $("body").on("click", `[data-option="map_quest_skip_time"]`, () => {
+                    this.useCompressor();
+                });
                 $(document).keydown((event) => {
                     if (!$("input, textarea").is(":focus")) {
                         if (event.key === "x" || event.key === "X") {
@@ -1398,31 +1403,69 @@ if (typeof GAME === 'undefined') { } else {
                 });
                 $("body").on("click", `.quest_roll1.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll1 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll1) {
+                        roll1 = false;
+                    } else {
+                        roll1 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
                 $("body").on("click", `.quest_roll2.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll2 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll2) {
+                        roll2 = false
+                    } else {
+                        roll2 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
                 $("body").on("click", `.quest_roll3.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll3 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll3) {
+                        roll3 = false;
+                    } else {
+                        roll3 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
+            }
+            handleTournamentsSign() {
+                if(this.tourSigned) { return }
+                var currentServerTime = new Date(GAME.getTime()*1000);
+                var currentServerHour = currentServerTime.getHours();
+                var currentServerMinute = currentServerTime.getMinutes();
+                if((currentServerHour == 18 && currentServerMinute > 10) || (currentServerHour > 18 && currentServerHour < 21)) {
+                    var tourSignButton = $("[data-option=tournament_sign]");
+                    if(tourSignButton.length == 0) {
+                        GAME.emitOrder({a:57,type:0,type2:0,page:2});
+                        setTimeout(() => {
+                            this.handleTournamentsSign();
+                        }, 600);
+                    } else {
+                        var tid = tourSignButton[0].getAttribute("data-tid");
+                        GAME.emitOrder({a:57,type:1,tid:tid});
+                        setTimeout(() => {
+                            GAME.emitOrder({a:57,type:4});
+                        }, 1100);
+                        this.tourSigned = true;
+                    }
+                } else {
+                    setTimeout(() => {
+                        this.handleTournamentsSign();
+                    }, 300000);
+                }
             }
         }
         const kws = new kwsv3();
@@ -1452,6 +1495,7 @@ if (typeof GAME === 'undefined') { } else {
                     }, 400);
                 }, 1800);
             }
+            kws.handleTournamentsSign();
             setTimeout(() => {
                 if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
                     setTimeout(() => {
