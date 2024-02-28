@@ -89,7 +89,7 @@ class ballExp {
 
     showExpButtons() {
         $("#soulstone_interface > div.pull-left.ball_stats > div > div.main_bar").after('<button id="ss_lvlup_next" class="btn_small_gold option" data-option="ss_lvlup_next">Exp do NEXT</button>');
-        $("#soulstone_interface > div.pull-left.ball_stats > div > div.main_bar").after('<button id="ss_lvlup_nonstop" class="btn_small_gold option" data-option="ss_lvlup_nonstop">Exp bez przerwy</button>');
+        $("#soulstone_interface > div.pull-left.ball_stats > div > div.main_bar").after('<button id="ss_lvlup_nonstop" class="btn_small_gold option" data-option="ss_lvlup_nonstop">Exp no stop</button>');
     }
 
     switchButtonText() {
