@@ -1399,30 +1399,42 @@ if (typeof GAME === 'undefined') { } else {
                 });
                 $("body").on("click", `.quest_roll1.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll1 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll1) {
+                        roll1 = false;
+                    } else {
+                        roll1 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
                 $("body").on("click", `.quest_roll2.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll2 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll2) {
+                        roll2 = false
+                    } else {
+                        roll2 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
                 $("body").on("click", `.quest_roll3.option`, () => {
                     var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
-                    roll3 = true;
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 1,
-                        id: id
-                    });
+                    if (roll3) {
+                        roll3 = false;
+                    } else {
+                        roll3 = true;
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 1,
+                            id: id
+                        });
+                    }
                 });
             }
             handleTournamentsSign() {
@@ -1477,6 +1489,7 @@ if (typeof GAME === 'undefined') { } else {
                     }, 400);
                 }, 1800);
             }
+            kws.handleTournamentsSign();
             setTimeout(() => {
                 if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
                     setTimeout(() => {
