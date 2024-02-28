@@ -1453,7 +1453,7 @@ if (typeof GAME === 'undefined') { } else {
                         }, 600);
                     } else {
                         var tid = tourSignButton[0].getAttribute("data-tid");
-                        GAME.emitOrder({a:57,type:4,tid:tid});
+                        GAME.emitOrder({a:57,type:1,tid:tid});
                         setTimeout(() => {
                             GAME.emitOrder({a:57,type:4});
                         }, 1100);
