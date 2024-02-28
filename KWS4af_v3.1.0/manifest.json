@@ -1,7 +1,7 @@
   {
-    "name": "KW simplifier_v3",
+    "name": "KW assistant",
     "description": "Dla kazdego - za free, na zawsze",
-    "version": "3.3.0",
+    "version": "3.3.2",
     "manifest_version": 3,
     "permissions": [
       "tabs",
