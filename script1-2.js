@@ -26,6 +26,7 @@ if (typeof GAME === 'undefined') { } else {
                         writable: false
                     });
                 });
+                this.tourSigned = false;
                 this.settings = this.getSettings();
                 this.createCSS();
                 this.createMinimapSettings();
@@ -1423,6 +1424,30 @@ if (typeof GAME === 'undefined') { } else {
                         id: id
                     });
                 });
+            }
+            handleTournamentsSign() {
+                if(this.tourSigned) { return }
+                var currentServerHour = new Date(GAME.getTime()*1000).getHours();
+                if(currentServerHour >= 18 && currentServerHour < 21) {
+                    var tourSignButton = $("[data-option=tournament_sign]");
+                    if(tourSignButton.length == 0) {
+                        GAME.emitOrder({a:57,type:0,type2:0,page:2});
+                        setTimeout(() => {
+                            this.handleTournamentsSign();
+                        }, 600);
+                    } else {
+                        var tid = tourSignButton[0].getAttribute("data-tid");
+                        GAME.emitOrder({a:57,type:4,tid:tid});
+                        setTimeout(() => {
+                            GAME.emitOrder({a:57,type:4});
+                        }, 1100);
+                        this.tourSigned = true;
+                    }
+                } else {
+                    setTimeout(() => {
+                        this.handleTournamentsSign();
+                    }, 300000);
+                }
             }
         }
         const kws = new kwsv3();
