@@ -1471,7 +1471,7 @@ if (typeof GAME === 'undefined') { } else {
                 if((currentServerHour == 18 && currentServerMinute > 10) || (currentServerHour > 18 && currentServerHour < 21)) {
                     var tourSignButton = $("[data-option=tournament_sign]");
                     if(tourSignButton.length == 0) {
-                        GAME.emitOrder({a:57,type:0,type2:0,page:2});
+                        GAME.emitOrder({ a: 57, type: 0, type2: 0, page: 2 });
                         setTimeout(() => {
                             this.handleTournamentsSign();
                         }, 600);
