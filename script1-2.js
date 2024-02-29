@@ -27,6 +27,7 @@ if (typeof GAME === 'undefined') { } else {
                     });
                 });
                 this.tourSigned = false;
+                this.firstTournamentPageLoaded = false;
                 this.settings = this.getSettings();
                 this.createCSS();
                 this.createMinimapSettings();
@@ -684,6 +685,7 @@ if (typeof GAME === 'undefined') { } else {
                 $("#secondary_char_stats .activities ul").html(activities);
                 let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''} [${soulCards_one}| ${soulCards_two}| ${soulCards_three}| ${soulCards_four}| ${soulCards_five}] <span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
                 $(".kws_top_bar").html(innerHTML);
+                this.checkTournamentsSigning();
             }
             collectActivities() {
                 let received = $("#act_prizes").find("div.act_prize.disabled").length;
@@ -1441,7 +1443,27 @@ if (typeof GAME === 'undefined') { } else {
                     }
                 });
             }
+            checkTournamentsSigning() {
+                var currentServerTime = new Date(GAME.getTime()*1000);
+                var currentServerHour = currentServerTime.getHours();
+                if(currentServerHour > 21 && currentServerHour < 18) {
+                    this.tourSigned = false;
+                    this.firstTournamentPageLoaded = false;
+                } else {
+                    if (!this.firstTournamentPageLoaded) {
+                        GAME.emitOrder({ a: 57, type: 0, type2: 0, page: 1 });
+                        this.firstTournamentPageLoaded = true;
+                        setTimeout(() => {
+                            this.handleTournamentsSign();
+                        }, 600);
+                    }
+                }
+            }
             handleTournamentsSign() {
+                if (!this.firstTournamentPageLoaded) {
+                    this.checkTournamentsSigning();
+                    return
+                }
                 if(this.tourSigned) { return }
                 var currentServerTime = new Date(GAME.getTime()*1000);
                 var currentServerHour = currentServerTime.getHours();
@@ -1495,7 +1517,6 @@ if (typeof GAME === 'undefined') { } else {
                     }, 400);
                 }, 1800);
             }
-            // kws.handleTournamentsSign(); //do poprawki bo niektorzy nie moga wytrzymac xd
             setTimeout(() => {
                 if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
                     setTimeout(() => {
