@@ -1453,10 +1453,10 @@ if (typeof GAME === 'undefined') { } else {
                     if (!this.firstTournamentPageLoaded) {
                         GAME.emitOrder({ a: 57, type: 0, type2: 0, page: 1 });
                         this.firstTournamentPageLoaded = true;
-                        setTimeout(() => {
-                            this.handleTournamentsSign();
-                        }, 600);
                     }
+                    setTimeout(() => {
+                        this.handleTournamentsSign();
+                    }, 600);
                 }
             }
             handleTournamentsSign() {
