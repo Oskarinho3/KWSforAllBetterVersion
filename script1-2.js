@@ -1446,7 +1446,7 @@ if (typeof GAME === 'undefined') { } else {
             checkTournamentsSigning() {
                 var currentServerTime = new Date(GAME.getTime()*1000);
                 var currentServerHour = currentServerTime.getHours();
-                var currentServerMinute = currentServerTiem.getMinutes();
+                var currentServerMinute = currentServerTime.getMinutes();
                 if(currentServerHour > 21 && currentServerHour < 18) {
                     this.tourSigned = false;
                     this.firstTournamentPageLoaded = false;
