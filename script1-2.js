@@ -1446,24 +1446,23 @@ if (typeof GAME === 'undefined') { } else {
             checkTournamentsSigning() {
                 var currentServerTime = new Date(GAME.getTime()*1000);
                 var currentServerHour = currentServerTime.getHours();
+                var currentServerMinute = currentServerTiem.getMinutes();
                 if(currentServerHour > 21 && currentServerHour < 18) {
                     this.tourSigned = false;
                     this.firstTournamentPageLoaded = false;
                 } else {
-                    if (!this.firstTournamentPageLoaded) {
+                    if (!this.firstTournamentPageLoaded && currentServerMinute > 10) {
                         GAME.emitOrder({ a: 57, type: 0, type2: 0, page: 1 });
                         this.firstTournamentPageLoaded = true;
                     }
-                    setTimeout(() => {
-                        this.handleTournamentsSign();
-                    }, 600);
+                    if (this.firstTournamentPageLoaded && !this.tourSigned) {
+                        setTimeout(() => {
+                            this.handleTournamentsSign();
+                        }, 200);
+                    }
                 }
             }
             handleTournamentsSign() {
-                if (!this.firstTournamentPageLoaded) {
-                    this.checkTournamentsSigning();
-                    return
-                }
                 if(this.tourSigned) { return }
                 var currentServerTime = new Date(GAME.getTime()*1000);
                 var currentServerHour = currentServerTime.getHours();
@@ -1474,19 +1473,15 @@ if (typeof GAME === 'undefined') { } else {
                         GAME.emitOrder({ a: 57, type: 0, type2: 0, page: 2 });
                         setTimeout(() => {
                             this.handleTournamentsSign();
-                        }, 600);
+                        }, 200);
                     } else {
+                        this.tourSigned = true;
                         var tid = tourSignButton[0].getAttribute("data-tid");
                         GAME.emitOrder({a:57,type:1,tid:tid});
                         setTimeout(() => {
                             GAME.emitOrder({a:57,type:4});
-                        }, 1100);
-                        this.tourSigned = true;
+                        }, 600);
                     }
-                } else {
-                    setTimeout(() => {
-                        this.handleTournamentsSign();
-                    }, 300000);
                 }
             }
         }
