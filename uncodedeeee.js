@@ -1,4 +1,32 @@
 if (typeof GAME === 'undefined') {} else {
+    function pvp_option_bind(){
+        $('.poption').off('click').on('click',function(){
+            var th=$(this);
+            if(th.is(':disabled')) return false;
+            th.tooltip('hide');
+            var option=th.data('option');
+            switch(option){
+                case 'show_player':
+                    GAME.emitOrder({a:34,type:0,char_id:th.data('char_id')});
+                break;
+                case 'show_clan':
+                    var klan_id=parseInt(th.data('klan_id'));
+                    GAME.emitOrder({a:40,klan_id:klan_id});
+                break;
+                case 'pvp_attack':
+                    GAME.emitOrder({a:24,char_id:th.data('char_id'),quick:th.data('quick')});
+                break;
+                case 'gpvp_attack':
+                    GAME.emitOrder({a:24,type:1,char_id:th.data('char_id'),quick:th.data('quick')});
+                break;
+                case 'load_more_players':
+                    GAME.emitOrder({a:3,type:1,start:th.data('start_from'),vo:GAME.map_options.vo});
+                    $('.more_players').remove();
+                break;
+            }
+        });
+    }
+    
     let Pog = setInterval(() => {
             clearInterval(Pog);
 
@@ -1475,7 +1503,42 @@ if (typeof GAME === 'undefined') {} else {
                     res += '<div class="more_players"><button class="poption" data-option="load_more_players" data-start_from="' + entry.next_from + '">+' + entry.more + '</button></div>';
                 }
                 return res;
-            }
+            };
+            GAME.parsePlayerShadow = function (data, pvp_master) {
+                var entry = data.data;
+                var res = '';
+                if (
+                    (GAME.char_data.reborn < 4 && entry.data.reborn < 4) ||
+                    (entry.data.reborn <= GAME.char_data.reborn) ||
+                    (!PVP.higherRebornAvoid)
+                ) {
+                    var pd = entry.data;
+                    pd.empire = entry.empire;
+                    var qb = '';
+                    var erank = '';
+                    var cls = '';
+                    if (data.cd) {
+                        qb += this.showTimer(data.cd - this.getTime(), 'data-special="10" data-pd="' + pd.id + '"', ' playercd' + pd.id + '');
+                        cls = 'initial_hide_forced playericons' + pd.id;
+                    }
+                    if (pd.empire) {
+                        var cls2 = '';
+                        if (this.emp_enemies.indexOf(pd.empire) != -1) {
+                            if (this.emp_enemies_t[pd.empire] == 1) cls2 = 'war';
+                            else if (this.empire_locations.indexOf(this.char_data.loc) != -1) cls2 = 'war';
+                        }
+                        if (!pd.glory_rank) pd.glory_rank = 1;
+                        erank = '<img src="/gfx/empire/ranks/' + pd.empire + '/' + pd.glory_rank + '.png" class="glory_rank ' + cls2 + '" />';
+                    }
+                    qb += '<button class="poption map_bicon ' + cls + '" data-option="gpvp_attack" data-char_id="' + pd.id + '"><i class="ca"></i></button>';
+                    if (pvp_master) qb += '<button class="poption map_bicon ' + cls + '" data-option="gpvp_attack" data-char_id="' + pd.id + '" data-quick="1"><i class="qa"></i></button>';
+                    res += '<div class="player"><div class="belka">' + erank + '<strong class="player_rank' + pd.ranga + ' poption" data-option="show_player" data-char_id="' + pd.id + '">' + pd.name + ' - ' + LNG.lab348 + '</strong> <span>' + this.rebPref(pd.reborn) + pd.level + '</span> </div><div id="gpvp_opts_' + pd.id + '" class="right_btns">' + qb + '</div></div>';
+                }
+                else if (entry.more) {
+                    res += '<div class="more_players"><button class="poption" data-option="load_more_players" data-start_from="' + entry.next_from + '">+' + entry.more + '</button></div>';
+                }
+                return res;
+            };
             var RESP = {
                 wait: 60,
                 stop: true,
