@@ -10,7 +10,7 @@ if (typeof GAME === 'undefined') {} else {
                 const cssres = ` #res_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 638px; right: 155px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #res_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #res_Panel .res_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #res_Panel ul {margin-left:-30px; color:white; margin:7px 0px 5px 0px; padding: 0px; text-align: center;} `;
                 const csslpvm = ` #lpvm_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 435px; right: 5px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #lpvm_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #lpvm_Panel .lpvm_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #lpvm_Panel .pvm_killed {cursor:pointer;text-align:center; border-LGtom:solid gray 1px;text-align:center; color:white;} #lpvm_Panel .gamee_input{text-align:center; border-bottom:solid gray 1px; color: white;} `;
                 const html = ` <div id="main_Panel"> <div class="sekcja panel_dragg">ALL FOR ONE</div> <div class='gh_button gh_resp'>PVM<b class='gh_status red'>Off</b></div> <div class='gh_button gh_pvp'>PVP<b class='gh_status red'>Off</b></div> <div class='gh_button gh_lpvm'>Listy<b class='gh_status red'>Off</b></div> <div class='gh_button gh_res'>Zbierajka<b class='gh_status red'>Off</b></div> <div class='gh_button gh_code'>Kody<b class='gh_status red'>Off</b></div> </div> `;
-                const PVP_panel = ` <div id="pvp_Panel"> <div class="sekcja pvp_dragg">PVP</div> <div class='pvp_button pvp_pvp'>PVP<b class='pvp_status red'>Off</b></div> <div class='pvp_button pvp_Code'>Kody<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WI'>Wojny Imp<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WK'>Wojny Klanowe<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_buff_imp'>Bufy IMP<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_buff_clan'>Bufy KLAN<b class='pvp_status green'>On</b></div> <div class='gamee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Lista wojen" name='pvp_capt' value='' /></div> <div class='gameee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Szybkość 10-100" name='speed_capt' value='50' /></div> </div> `;
+                const PVP_panel = ` <div id="pvp_Panel"> <div class="sekcja pvp_dragg">PVP</div> <div class='pvp_button pvp_pvp'>PVP<b class='pvp_status red'>Off</b></div> <div class='pvp_button pvp_Code'>Kody<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_rb_avoid'>Unikaj borny<b class='pvp_status green'>Off</b></div> <div class='pvp_button pvp_WI'>Wojny Imp<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WK'>Wojny Klanowe<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_buff_imp'>Bufy IMP<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_buff_clan'>Bufy KLAN<b class='pvp_status green'>On</b></div> <div class='gamee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Lista wojen" name='pvp_capt' value='' /></div> <div class='gameee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Szybkość 10-100" name='speed_capt' value='50' /></div> </div> `;
                 const RESP_panel = ` <div id="resp_Panel"> <div class="sekcja resp_dragg">SPAWN MOBKóW</div> <div class="resp_button resp_resp">RESP<b class="resp_status red">Off</b></div> <div class="resp_button resp_code">Kody<b class="resp_status green">On</b></div> <div class="resp_button resp_sub">Subka<b class="resp_status green">On</b></div> <div class="resp_button resp_ost">Jaka<b class="resp_status green">Ost</b></div> <div class="resp_button resp_multi">Multiwalka<b class="resp_status green">On</b></div> <div class="resp_button resp_ssj">SSJ<b class="resp_status green">On</b></div> <div class="resp_button resp_buff_imp">Bufki IMP<b class="resp_status green">On</b></div> <div class="resp_button resp_buff_clan">Bufki KLAN<b class="resp_status green">On</b></div> <div class="resp_button resp_blue">BLUE<b class="resp_status red">Off</b></div> <div class="resp_button resp_green">GREEN<b class="resp_status red">Off</b></div> <div class="resp_button resp_purple">PURPLE<b class="resp_status red">Off</b></div> <div class="resp_button resp_yellow">YELLOW<b class="resp_status red">Off</b></div> <div class="resp_button resp_red">RED<b class="resp_status red">Off</b></div> <div class="resp_button resp_magic">Wyciąg<b class="resp_status red">Off</b></div> <div class="resp_button resp_bless">BŁOGO<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh1">SMOK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh2">5% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh3">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh4">150K MAX<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh5">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh6">5% PSK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh7">200% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh8">500 LVL<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh9">500% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh10">25% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_on">Włącz All<b class="resp_status green">On</b></div> <div class="resp_button resp_off">Wyłącz All<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh11">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh14">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh12">200% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh13">300% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh15">5% kod<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh16">5 Min cd pvp <b class="resp_status red">Off</b></div> <div class="resp_button resp_bh17">15% szybsze zbieranie<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh18">15% więcej szansy na zebranie<b class="resp_status red">Off</b></div> </div> `;
                 const CODE_panel = ` <div id="code_Panel"> <div class="sekcja code_dragg">Kody</div> <div class="code_button code_code">KODY<b class="code_status red">Off</b></div> <div class="code_button code_acc">Konto<b class="code_status red">Off</b></div> <div class="code_button code_zast">Zastępstwa<b class="code_status red">Off</b></div> <div class="code_button code_bh1">Błogo 250% tren<b class="code_status red">Off</b></div> <div class="code_button code_bh2">Błogo 5% kod<b class="code_status red">Off</b></div> <label class='select_input'><select id='bot_what_to_train'><option value='1'>Siła</option><option value='2'>Szybkość</option><option value='3'>Wytrzymałość</option><option value='4'>Siła Woli</option><option value='5'>Energia Ki</option><option value='6'>Wtajemniczenie</option></select></label> <label class='select_input'><select id='bot_what_to_traintime'><option value='1'>1 godz.</option><option value='2'>2 godz.</option><option value='3'>3 godz.</option><option value='4'>4 godz.</option><option value='5'>5 godz.</option><option value='6'>6 godz.</option><option value='7'>7 godz.</option><option value='8'>8 godz.</option><option value='9'>9 godz.</option><option value='10'>10 godz.</option><option value='11'>11 godz.</option><option value='12'>12 godz.</option></label> </div> `;
                 const RES_panel = ` <div id="res_Panel"> <div class="sekcja res_dragg">SUROWCE</div> <div class="res_button res_res">ZBIERAJ<b class="res_status red">Off</b></div> <div class="bt_cool" style="text-align:center; color:white;"></div> <ul></ul> </div> `;
@@ -115,6 +115,15 @@ if (typeof GAME === 'undefined') {} else {
                     } else {
                         $(".pvp_pvp .pvp_status").removeClass("green").addClass("red").html("Off");
                         PVP.stop = true;
+                    }
+                });
+                $('#pvp_Panel .pvp_rb_avoid').click(() => {
+                    if (PVP.higherRebornAvoid) {
+                        $(".pvp_rb_avoid .pvp_status").removeClass("green").addClass("red").html("Off");
+                        PVP.higherRebornAvoid = false;
+                    } else {
+                        $(".pvp_rb_avoid .pvp_status").removeClass("red").addClass("green").html("On");
+                        PVP.higherRebornAvoid = true;
                     }
                 });
                 $('#pvp_Panel .pvp_Code').click(() => {
@@ -890,6 +899,7 @@ if (typeof GAME === 'undefined') {} else {
                 wi: true,
                 code: true,
                 wk: true,
+                higherRebornAvoid: false,
                 caseNumber: 0,
                 wait: 10,
                 wait2: 80,
@@ -1428,6 +1438,44 @@ if (typeof GAME === 'undefined') {} else {
                 if ($("#pvp_Panel input[name=speed_capt]").val() == '') speed = 50;
                 return speed / 50;
             };
+            GAME.parseListPlayer = function (entry, pvp_master) {
+                var res = '';
+                if (
+                    (GAME.char_data < 4 && entry.data.reborn < 4) ||
+                    (entry.data.reborn <= GAME.char_data) ||
+                    (!PVP.higherRebornAvoid)
+                ) {
+                    var pd = entry.data;
+                    var qb = '';
+                    var klan = '', erank = '';
+                    if (pd.klan_id) {
+                        var cls = '';
+                        if (this.clan_enemies.indexOf(pd.klan_id) != -1) cls = 'enemy';
+                        klan = '<b class="poption player_clan ' + cls + '" data-option="show_clan" data-klan_id="' + pd.klan_id + '">' + pd.klan_short + ' <img src="' + pd.emblem + '" /></b>';
+                    }
+                    var cls = '';
+                    if (entry.cd) {
+                        qb += this.showTimer(entry.cd - this.getTime(), 'data-special="10" data-pd="' + pd.id + '"', ' playercd' + pd.id + '');
+                        cls = 'initial_hide_forced playericons' + pd.id;
+                    }
+                    if (pd.empire) {
+                        var cls2 = '';
+                        if (this.emp_enemies.indexOf(pd.empire) != -1) {
+                            if (this.emp_enemies_t[pd.empire] == 1) cls2 = 'war';
+                            else if (this.empire_locations.indexOf(this.char_data.loc) != -1) cls2 = 'war';
+                        }
+                        if (!pd.glory_rank) pd.glory_rank = 1;
+                        erank = '<img src="/gfx/empire/ranks/' + pd.empire + '/' + pd.glory_rank + '.png" class="glory_rank ' + cls2 + '" />';
+                    }
+                    qb += '<button class="poption map_bicon ' + cls + '" data-option="pvp_attack" data-char_id="' + pd.id + '"><i class="ca"></i></button>';
+                    if (pvp_master) qb += '<button class="poption map_bicon ' + cls + '" data-option="pvp_attack" data-char_id="' + pd.id + '" data-quick="1"><i class="qa"></i></button>';
+                    res += '<div class="player"><div class="belka">' + erank + '<strong class="player_rank' + pd.ranga + ' poption" data-option="show_player" data-char_id="' + pd.id + '">' + pd.name + '</strong> <span>' + this.rebPref(pd.reborn) + pd.level + '</span> ' + klan + '</div><div id="pvp_opts_' + pd.id + '" class="right_btns">' + qb + '</div></div>';
+                }
+                else if (entry.more) {
+                    res += '<div class="more_players"><button class="poption" data-option="load_more_players" data-start_from="' + entry.next_from + '">+' + entry.more + '</button></div>';
+                }
+                return res;
+            }
             var RESP = {
                 wait: 60,
                 stop: true,
