@@ -1441,8 +1441,8 @@ if (typeof GAME === 'undefined') {} else {
             GAME.parseListPlayer = function (entry, pvp_master) {
                 var res = '';
                 if (
-                    (GAME.char_data < 4 && entry.data.reborn < 4) ||
-                    (entry.data.reborn <= GAME.char_data) ||
+                    (GAME.char_data.reborn < 4 && entry.data.reborn < 4) ||
+                    (entry.data.reborn <= GAME.char_data.reborn) ||
                     (!PVP.higherRebornAvoid)
                 ) {
                     var pd = entry.data;
