@@ -1629,9 +1629,8 @@ if (typeof GAME === 'undefined') { } else {
                     GAME.map_move(7)//klawisz 'd'
                 });
                 $('#klawiszx').click(() => {
-                    var keyEvent = jQuery.Event('keydown');
-                    keyEvent.which = 88;
-                    $(document).trigger(keyEvent);
+                    this.questProceed();
+                    kom_clear();
                 });
                 $('#klawiszz').click(() => {
                     GAME.map_move(4)//klawisz 'z'
