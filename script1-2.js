@@ -1521,6 +1521,10 @@ if (typeof GAME === 'undefined') { } else {
                         left: 5px !important;
                         top: 650px !important;
                     }
+                    #quest_con {
+                        margin-top: -295px !important;
+                        left: -450px !important;
+                    }
                 `;
                 $("head").append(customStyles);
                 var kwsHidePilotElement = document.getElementById('kws_hidePilot');
