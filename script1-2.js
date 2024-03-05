@@ -1537,10 +1537,10 @@ if (typeof GAME === 'undefined') { } else {
                 } else {
                     console.error('Element o ID "kws_hidePilot" nie został znaleziony.');
                 }
-                var minimap = $('#minimap_canvas');
-                var gridCanvas = $('#minimap_grid_canvas');
-                var minimapLay = $('.minimap_lay');
-                var kwsLocInfo = $('#kws_locInfo');
+                var minimap = document.querySelector('#minimap_canvas');
+                var gridCanvas = document.querySelector('#minimap_grid_canvas');
+                var minimapLay = document.querySelector('.minimap_lay');
+                var kwsLocInfo = document.querySelector('#kws_locInfo');
 
                 if (minimap) {
                     minimap.style.left = '-15px';
