@@ -68,6 +68,7 @@ if (typeof GAME === 'undefined') { } else {
                 $('.MoveIcon[data-option="mob_spawner_go"]').after('<div class="MoveIcon bigg option" data-option="map_multi_pvp" data-toggle="tooltip" data-original-title="<div class=tt>Multiwalka PvP<br />Klawisz skrótu:<b class=orange>B</b></div>"><img src="https://i.imgur.com/QPQBcFp.png"></div>');
                 $('.MoveIcon[data-option="map_multi_pvp"]').after('<div class="MoveIcon bigg option" data-option="map_quest_skip" data-toggle="tooltip" data-original-title="<div class=tt>Opcja Dalej w otwartym zadaniu jeśli jest jedna. Atakuje bosy w zadaniach i zamyka raport z walki. W zadaniu nuda wybiera opcję na zabicie mobków. W zadaniu subki wybiera opcję za 100k. Zamyka komunikaty. Zbiera zasób na którym stoimy.<br />Klawisz skrótu:<b class=orange>X</b></div>"><img src="https://i.imgur.com/wuK91VF.png"></div>');
                 $('.MoveIcon[data-option="map_quest_skip"]').after('<div class="MoveIcon bigg option" data-option="map_quest_skip_time" data-toggle="tooltip" data-original-title="<div class=tt>Używanie zegarków w zadaniach<br />Klawisz skrótu:<b class=orange>N</b></div>"><img src="https://i.imgur.com/9YCvJKe.png"></div>');
+                $('.MoveIcon[data-option="map_quest_skip_time"]').after('<div class="MoveIcon bigg option" data-option="map_alternative_pilot" data-toggle="tooltip" data-original-title="<div class=tt>Ukryje pilota, pokazuje inną klawiaturę<br />Klawisz skrótu:<b class=orange>=</b></div>"><img src="https://up.be3.ovh/upload/1709400449.png"></div>');
                 this.auto_abyss_interval = false;
                 this.auto_arena = false;
                 setInterval(() => {
@@ -1297,6 +1298,9 @@ if (typeof GAME === 'undefined') { } else {
                 $("body").on("click", `[data-option="map_quest_skip_time"]`, () => {
                     this.useCompressor();
                 });
+                $("body").on("click", `[data-option="map_quest_skip_time"]`, () => {
+                    this.createAlternativePilot();
+                });
                 $(document).keydown((event) => {
                     if (!$("input, textarea").is(":focus")) {
                         if (event.key === "x" || event.key === "X") {
@@ -1353,6 +1357,8 @@ if (typeof GAME === 'undefined') { } else {
                                     set: set
                                 });
                             }
+                        } else if (event.key === "=") {
+                            this.createAlternativePilot();
                         } else if (event.key === "9" && JQS.qcc.is(":visible")) { }
                     }
                 });
@@ -1483,6 +1489,243 @@ if (typeof GAME === 'undefined') { } else {
                         }, 600);
                     }
                 }
+            }
+            createAlternativePilot() {
+                document.getElementById('map_pilot').style.width = '512px';
+                var customStyles = document.createElement('style');
+                customStyles.type = 'text/css';
+                customStyles.innerHTML = `
+                    .qtrack {
+                        width: 410px !important;
+                        font-size: 12px !important;
+                    }
+                    .qtrack strong {
+                        font-size: 12px !important;
+                    }
+                    .adv {
+                        display: none !important;
+                    }
+                    .kom {
+                        background: url(/gfx/layout/tloPilot.png) !important;
+                        background-size: cover !important;
+                        border-image: url(/gfx/layout/mapborder.png) 7 8 7 7 fill !important;
+                        border-style: solid !important;
+                        border-width: 7px 8px 7px 7px !important;
+                        box-shadow: none !important;
+                    }
+                    .kom .close_kom b {
+                        background: url(/gfx/layout/tloPilot.png) !important;
+                    }
+                    #war_container {
+                        position: absolute !important;
+                        left: 5px !important;
+                        top: 650px !important;
+                    }
+                `;
+                $("head").append(customStyles);
+                var kwsHidePilotElement = document.getElementById('kws_hidePilot');
+                var mapPilotElement = document.getElementById('map_pilot');
+                if (kwsHidePilotElement) {
+                    kwsHidePilotElement.value = '1';
+                    var changeEvent = new Event('change');
+                    kwsHidePilotElement.dispatchEvent(changeEvent);
+                    if (kwsHidePilotElement.value === '1' && mapPilotElement) {
+                        mapPilotElement.style.display = 'none';
+                    }
+                    var clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+                    kwsHidePilotElement.dispatchEvent(clickEvent);
+                } else {
+                    console.error('Element o ID "kws_hidePilot" nie został znaleziony.');
+                }
+                var minimap = $('#minimap_canvas');
+                var gridCanvas = $('#minimap_grid_canvas');
+                var minimapLay = $('.minimap_lay');
+                var kwsLocInfo = $('#kws_locInfo');
+
+                if (minimap) {
+                    minimap.style.left = '-15px';
+                    minimap.style.top = '813px';
+                }
+
+                if (gridCanvas) {
+                    gridCanvas.style.left = '-15px';
+                    gridCanvas.style.top = '813px';
+                }
+
+                if (minimapLay) {
+                    minimapLay.style.left = '-30px';
+                    minimapLay.style.top = '802px';
+                }
+
+                if (kwsLocInfo) {
+                    kwsLocInfo.style.left = '-235px';
+                    kwsLocInfo.style.top = '860px';
+                }
+
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:530px; left:144px; z-index:999;'><button 		 id='klawiszw' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>&#8593;</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:530px; left:65px; z-index:999;'><button id='klawiszq' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>Q</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:530px; left:225px; z-index:999;'><button id='klawisze' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>E</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:607px; left:144px; z-index:999;'><button id='klawiszs' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>&#8595;</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:607px; left:65px; z-index:999;'><button id='klawisza' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>&#8592;</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:607px; left:225px; z-index:999;'><button id='klawiszd' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>&#8594;</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:684px; left:145px; z-index:999;'><button id='klawiszx' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>x</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:684px; left:65px; z-index:999;'><button id='klawiszz' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>Z</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:684px; left:225px; z-index:999;'><button id='klawiszc' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>C</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:761px; left:100px; z-index:999;'><button id='klawiszr' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>R</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:761px; left:189px; z-index:999;'><button id='klawiszv' style='width: 70px; height: 70px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 50px;'>V</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                // dodanie obrazka do kontenera
+                addToMapCanvas("<div style='position:absolute; top:530px; left:310px; z-index:999;'><button id='klawiszqx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>Qx5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:530px; left:373px; z-index:999;'><button id='klawiszwx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;;'>&#8593;x5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:530px; left:436px; z-index:999;'><button id='klawiszex3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>Ex5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:595px; left:310px; z-index:999;'><button id='klawiszax3' style='width: 60px; height:60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>&#8592;x5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:595px; left:373px; z-index:999;'><button id='klawiszsx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>x5&#8595;</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:595px; left:436px; z-index:999;'><button id='klawiszdx3' style='width:60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>&#8594;x5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:660px; left:310px; z-index:999;'><button id='klawiszzx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>Zx5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:660px; left:436px; z-index:999;'><button id='klawiszcx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>Cx5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:730px; left:373px; z-index:999;'><button id='klawiszvx3' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>Vx5</button></div>");
+                addToClearfix('<div id="map_canvas_container" style="position:absolute; top:731px; left:59px; "></div>');
+                addToMapCanvas("<div style='position:absolute; top:730px; left:310px; z-index:999;'><button id='klawiszb5' style='width:60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>B</button></div>");
+                addToMapCanvas("<div style='position:absolute; top:730px; left:436px; z-index:999;'><button id='klawiszn' style='width: 60px; height: 60px; border-radius: 5px; border: 2px solid white; padding: 5px; background-color: black; color: white; cursor: pointer; font-size: 16px;'>N</button></div>");
+
+                this.bindAlternativePilotButtons();
+
+                e.preventDefault();
+            }
+            addToClearfix(data) {
+                $('.clearfix').append(data);
+            }
+            addToMapCanvas(data) {
+                $('#map_canvas_container').append(data);
+            }
+            bindAlternativePilotButtons() {
+                $('#klawiszw').click(() => {
+                    GAME.map_move(2) // klawisz 'w'
+                });
+                $('#klawiszq').click(() => {
+                    GAME.map_move(6) //klawisz 'q'
+                });
+                $('#klawisze').click(() => {
+                    GAME.map_move(5)// klawisz 'e'
+                });
+                $('#klawiszs').click(() => {
+                    GAME.map_move(1) //klawisz 's'
+                });
+                $('#klawisza').click(() => {
+                    GAME.map_move(8) //Klawisz 'a'
+                });
+                $('#klawiszd').click(() => {
+                    GAME.map_move(7)//klawisz 'd'
+                });
+                $('#klawiszx').click(() => {
+                    var keyEvent = jQuery.Event('keydown');
+                    keyEvent.which = 88;
+                    $(document).trigger(keyEvent);
+                });
+                $('#klawiszz').click(() => {
+                    GAME.map_move(4)//klawisz 'z'
+                });
+                $('#klawiszc').click(() => {
+                    GAME.map_move(3)//klawisz 'c'
+                });
+                $('#klawiszr').click(() => {
+                    GAME.emitOrder({ a: 13, mob_num: GAME.field_mob_id, fo: GAME.map_options.ma })//klawisz 'r'
+                });
+                $('#klawiszv').click(() => {
+                    GAME.emitOrder({ a: 7, order: 2, quick: 1, fo: GAME.map_options.ma })// klawisz 'v'
+                });
+                $('#klawiszqx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(6)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszwx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(2) // klawisz 'w' x 3
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszex3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(5)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszax3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(8)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszsx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(1)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszdx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(7)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszzx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(4)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszcx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.map_move(3)
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszvx3').click(() => {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            GAME.emitOrder({ a: 7, order: 2, quick: 1, fo: GAME.map_options.ma })
+                        }, i * 130);
+                    }
+                });
+                $('#klawiszb5').click(() => {
+                    var keyEvent = jQuery.Event('keydown');
+                    keyEvent.which = 66;  // Kod klawisza 'b' 
+                    $(document).trigger(keyEvent);
+                });
+                $('#klawiszn').click(() => {
+                    var keyEvent = jQuery.Event('keydown');
+                    keyEvent.which = 78;  // Kod klawisza 'n'
+                    $(document).trigger(keyEvent);
+                });
             }
         }
         const kws = new kwsv3();
