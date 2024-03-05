@@ -1628,9 +1628,10 @@ if (typeof GAME === 'undefined') { } else {
                 $('#klawiszd').click(() => {
                     GAME.map_move(7)//klawisz 'd'
                 });
-                $("#klawiszx").on("click", () => {
+                $('#klawiszx').click(() => {
                     this.questProceed();
                     kom_clear();
+                    GAME.executeIx();
                 });
                 $('#klawiszz').click(() => {
                     GAME.map_move(4)//klawisz 'z'
