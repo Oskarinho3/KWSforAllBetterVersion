@@ -1298,7 +1298,7 @@ if (typeof GAME === 'undefined') { } else {
                 $("body").on("click", `[data-option="map_quest_skip_time"]`, () => {
                     this.useCompressor();
                 });
-                $("body").on("click", `[data-option="map_quest_skip_time"]`, () => {
+                $("body").on("click", `[data-option="map_alternative_pilot"]`, () => {
                     this.createAlternativePilot();
                 });
                 $(document).keydown((event) => {
