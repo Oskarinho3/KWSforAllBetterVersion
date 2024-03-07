@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-Darmowe narzedzie do gry kosmiczniwojownicy.pl -> kosmiczni.pl (idioci nawet adresu nie znają)
+Darmowe narzedzie do gry kosmiczniwojownicy.pl -> kosmiczni.pl (idioci nawet adresu nie znają), (już poznali i poprawili 🤣)
 
 Wersja lepsza od oryginału
 
