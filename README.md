@@ -1,22 +1,17 @@
 ### Hi there 👋
 
-Darmowe narzedzie do gry kosmiczniwojownicy.pl
+Darmowe narzedzie do gry kosmiczniwojownicy.pl -> kosmiczni.pl (idioci nawet adresu nie znają)
 
-Po aktualizacje, instrukcje, porady, spolecznosc jak i wklad w to w jakim kierunku zmierza bot, zapraszam tutaj:
+Wersja lepsza od oryginału
 
-https://discord.gg/AEu869GEW6
+Zasady korzystania:
 
-<!--
-**KWSforAll/KWSforAll** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+1. Użytkownicy mogą dostosowywać ten kod do swoich własnych potrzeb i preferencji w obrębie lokalnego rozszerzenia.
 
-Here are some ideas to get you started:
+2. Niemniej jednak, wszelkie modyfikacje lub dostosowania należy dokonać lokalnie na komputerze użytkownika i nie wolno ich udostępniać publicznie w formie repozytorium na platformach takich jak GitHub lub inne.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+3. Wszelkie próby kopiowania lub rozpowszechniania tego kodu w formie publicznego repozytorium na platformach do zarządzania kodem (takich jak GitHub) będą traktowane jako naruszenie praw autorskich i mogą podlegać odpowiednim krokom prawowym.
+
+4. Autor tego kodu zachowuje wszelkie prawa autorskie i zastrzega sobie prawo do wprowadzania zmian w tych zasadach w dowolnym momencie.
+
+Prosimy o przestrzeganie powyższych zasad. Dziękujemy za korzystanie z tego kodu.
